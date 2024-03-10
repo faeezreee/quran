@@ -3,47 +3,14 @@ const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 const OpenAI = require('openai');
 const config = require('./config');
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
 
 const openai = new OpenAI({
     apiKey: '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',
     endpoint: 'https://api.openai.com'
 });
 
-const bodyParser = require('body-parser');
-// Import multer for handling multipart/form-data
-const multer = require('multer');
-
-// Other imports remain unchanged...
-
 const app = express();
 app.use(bodyParser.json());
-
-// Configure multer for file upload, setting storage as memory storage.
-// This is a basic setup. Configure according to your needs.
-const upload = multer({ storage: multer.memoryStorage() });
-
-// Define your steps and userState map as before...
-
-// Updated to include file handling
-app.post('/upload', upload.single('file'), async (req, res) => {
-  try {
-    // You can access the file via req.file
-    if (!req.file) {
-      return res.status(400).send('No file uploaded.');
-    }
-
-    // Process the uploaded file...
-    // For example, you might want to save it to Google Cloud Storage
-
-    res.send('File uploaded successfully.');
-  } catch (error) {
-    console.error('Upload error:', error.message);
-    res.status(500).send('Internal Server Error');
-  }
-});
-
 
 // Define workflow steps
 const steps = {
