@@ -20,7 +20,6 @@ const multer = require('multer');
 const app = express();
 app.use(bodyParser.json());
 
-module.exports = app;
 // Configure multer for file upload, setting storage as memory storage.
 // This is a basic setup. Configure according to your needs.
 const upload = multer({ storage: multer.memoryStorage() });
@@ -1015,8 +1014,7 @@ app.get('/', function (req, res) {
 
 app.post('/hook/messages', handleNewMessages);
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
-
-app.listen(3000, () => console.log("Server ready on port 3000."));
-
-module.exports = app;
+const port = config.port || (config.botUrl.indexOf('https:') === 0 ? 443 : 80);
+app.listen(port, function () {
+    console.log(`Listening on port ${port}...`);
+});
